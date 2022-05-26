@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+		"lib": [
+      "es6",
+      "DOM",
+      "ES2020"
+    ],
+    "outDir": "./dist",
+    "incremental": true,
+    "declaration": true,
+    "strict": true,
+		"esModuleInterop": true,
+		"noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+		"moduleResolution": "node",
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/__tests__/*"]
+}
