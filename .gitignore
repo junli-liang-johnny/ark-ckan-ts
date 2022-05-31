@@ -2,3 +2,4 @@ node_modules
 .DS_store
 /target
 tsconfig.tsbuildinfo
+ckan.config.json

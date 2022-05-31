@@ -18,6 +18,7 @@
     "removeComments": false,
     "sourceMap": true,
 		"moduleResolution": "node",
+    "resolveJsonModule": true,
     "types": [
       "node"
     ],

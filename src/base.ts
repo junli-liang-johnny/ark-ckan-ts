@@ -2,20 +2,15 @@ import { CKANAPIPackageSearchProps, CKANAPIPackageSearchResponse, CKANPackageSer
 import { CKANAPIGetListResponse, CKANAPIPackage, CKANAPIPackageAutocompleteResponse, CKANAPIToken } from './types';
 import { CKANUserService } from './user';
 import { v4 as uuid4 } from 'uuid';
+import { ckan_api_url, ckan_url, api_key, api_key_id } from '../ckan.config.json';
 
-/**
- * available apis
- * get: package_list, group_list, organization_list, tag_list
- * create: package_create, group_create, organization_list, 
- */
 export const CKAN_API_TOKEN_LOCALSTORAGE_KEY = 'ckan_api_token_key';
 
 export class CKANAPIBase {
-  static BASE_CKAN_URL = 'https://openark.adaptcentre.ie/ARKEvidence';
-  static BASE_CKAN_API_URL = CKANAPIBase.BASE_CKAN_URL + '/api/action';
-  // make sure create API key to do creation https://docs.ckan.org/en/2.9/api/index.html?highlight=user%20authorize#example-importing-datasets-with-the-ckan-api
-  static API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJHV2NEWGhvdW9HRVRWM0N0MGhxdFkzRjJ2ZFY1MGgzU0x1ZFd1UmxmSEZsSTBuTWxVZXVPanJ6LXN0YXh3enJ2U0lfWHRYTVljYUpmOXI5QiIsImlhdCI6MTYyMTUxMjAxN30.1gHrU7hgSf6QC6MHUym8YdGliB4DkTbRakwDCyLxt8s'
-  static API_KEY_ID = 'GWcDXhouoGETV3Ct0hqtY3F2vdV50h3SLudWuRlfHFlI0nMlUeuOjrz-staxwzrvSI_XtXMYcaJf9r9B';
+  static BASE_CKAN_URL = ckan_url;
+  static BASE_CKAN_API_URL = ckan_api_url;
+  static API_KEY = api_key;
+  static API_KEY_ID = api_key_id;
 
   constructor() { }
 
