@@ -7,7 +7,7 @@
       "DOM",
       "ES2020"
     ],
-    "outDir": "./dist",
+    "outDir": "dist",
     "incremental": true,
     "declaration": true,
     "strict": true,
@@ -21,6 +21,12 @@
       "./node_modules/@types"
     ],
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "files": [
+    "./src/index.ts"
+  ],
+  // "include": ["src/*"],
+  "exclude": [
+    "node_modules", 
+    "**/__tests__/*"
+  ]
 }
