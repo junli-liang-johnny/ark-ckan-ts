@@ -8,7 +8,6 @@
       "ES2020"
     ],
     "outDir": "./dist",
-    // "rootDir": "./src",
     "incremental": true,
     "declaration": true,
     "strict": true,
@@ -17,11 +16,7 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-		"moduleResolution": "node",
     "resolveJsonModule": true,
-    "types": [
-      "node"
-    ],
     "typeRoots": [
       "./node_modules/@types"
     ],

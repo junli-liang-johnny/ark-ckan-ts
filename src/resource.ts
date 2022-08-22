@@ -1,6 +1,6 @@
 import nodeFetch from 'node-fetch';
 import NodeFormData from 'form-data';
-import { CKANAPIBase } from '.';
+import { CKANAPIBase } from './base';
 import { CKANAPIHeaders, CKANAPIAction, CKANAPIGetServiceResponse, CKANAPIResourceCreateProps, CKANAPIResourceSearchProps, CKANAPIResourceSearchResponse, CKANAPIResourceShowProps, CKANAPIResourceShowResponse, CKANAPIResourceUpdateProps } from './types';
 
 type ReturnType = CKANAPIResourceShowResponse | CKANAPIResourceSearchResponse;
@@ -62,7 +62,7 @@ export class CKANResourceService {
       })
         .then(res => res.json())
         .then(res => {
-          console.log('ckan - resource - create - res: ', res);
+          console.debug('ckan - resource - create - res: ', res);
           return resolve(res as CKANAPIResourceShowResponse);
         })
         .catch(err => {
@@ -92,7 +92,7 @@ export class CKANResourceService {
       })
         .then(res => res.json())
         .then(res => {
-          console.log('ckan - resource - create - res: ', res);
+          console.debug('ckan - resource - create - res: ', res);
           return resolve(res as CKANAPIResourceShowResponse);
         })
         .catch(err => {

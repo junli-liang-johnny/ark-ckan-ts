@@ -1,6 +1,6 @@
 import nodeFetch from 'node-fetch';
 import NodeFormData from 'form-data';
-import { CKANAPIBase } from '.';
+import { CKANAPIBase } from './base';
 import { CKANAPIGetListResponse, CKANAPIHeaders, CKANAPIAction, CKANAPIGetServiceResponse, CKANAPIPackageAutocompleteResponse, CKANAPIPackageCreateProps, CKANAPIPackageListProps, CKANAPIPackageSearchProps, CKANAPIPackageSearchResponse, CKANAPIPackageShowProps, CKANAPIPackageShowResponse, CKANAPIPackageUpdateProps } from './types';
 
 type ReturnType = CKANAPIGetListResponse | CKANAPIPackageShowResponse | CKANAPIPackageSearchResponse | CKANAPIPackageAutocompleteResponse;
@@ -18,7 +18,7 @@ export class CKANPackageService {
 
   static get = <T extends ReturnType>(action: CKANAPIAction, data: Partial<CKANAPIPackageShowProps | CKANAPIPackageListProps | CKANAPIPackageSearchProps>, headers?: CKANAPIHeaders): Promise<CKANAPIGetServiceResponse<T>> => {
     return new Promise((resolve, reject) => {
-      console.log('ckan package - get - data: ', data, ', headers: ', headers);
+      console.debug('ckan package - get - data: ', data, ', headers: ', headers);
 
       const url = createGetURL(action, data);
 

@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { CKANAPIBase } from '.';
+import { CKANAPIBase } from './base';
 import { CKANAPIGetListResponse, CKANAPIGroupGetListProps, CKANAPIGroupGetShowProps, CKANAPIGroupShowResponse } from './types';
 
 const getListParamArray: (keyof CKANAPIGroupGetListProps)[] = ['all_fields', 'groups', 'include_dataset_count', 'include_extras', 'include_groups', 'include_tags', 'include_users', 'limit', 'offset', 'order_by', 'sort'];

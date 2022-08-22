@@ -5,8 +5,9 @@
   "description": "CKAN module written in TS",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watch -u --config ./jest.config.js",
     "build": "tsc --build"
   },
   "keywords": [],
@@ -17,11 +18,16 @@
   "license": "ISC",
   "dependencies": {
     "form-data": "^4.0.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "uuid": "^8.3.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.18.10",
+    "@types/jest": "^28.1",
+    "@types/node-fetch": "^2.6.2",
     "@types/uuid": "^8.3.4",
+    "jest": "^28.1",
+    "ts-jest": "^28.0.8",
     "ts-node": "^10.8.0",
     "typescript": "^4.2.4"
   }

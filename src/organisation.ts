@@ -1,4 +1,4 @@
-import { CKANAPIBase } from '.';
+import { CKANAPIBase } from './base';
 import { CKANAPIGetListResponse, CKANAPIOrganisationGetListProps, CKANAPIOrganisationMemberCreateProps, CKANAPIOrganisationMemberCreateResponse, CKANAPIOrganisationShowResponse, CKANAPIOrganizationGetShowProps } from './types';
 
 export class CKANAPIOrganisationService {
@@ -23,7 +23,7 @@ export class CKANAPIOrganisationService {
 
   static create(type: 'member_create', data: CKANAPIOrganisationMemberCreateProps): Promise<CKANAPIOrganisationMemberCreateResponse> {
     return new Promise((resolve, reject) => {
-      // console.log('ckan organisation - data: ', data);
+      // console.debug('ckan organisation - data: ', data);
       let url;
       const formData = new FormData();
       Object.entries(data).forEach(([key, val]) => formData.append(key, val));
@@ -36,7 +36,7 @@ export class CKANAPIOrganisationService {
       fetch(url, { 'method': 'POST', 'headers': { 'Authorization': CKANAPIBase.API_KEY }, 'body': formData })
         .then(res => res.json())
         .then(res => {
-          // console.log('ckan organisation - res: ', res);
+          // console.debug('ckan organisation - res: ', res);
           if (type === 'member_create')
             return resolve(res as CKANAPIOrganisationMemberCreateResponse);
 

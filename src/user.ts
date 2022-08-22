@@ -1,11 +1,10 @@
-import { CKANAPIBase } from '.';
+import { CKANAPIBase } from './base';
 import { CKANAPIResponse, CKANAPITokenRevokeProps, CKANAPIUserCreateProps, CKANAPIUserGetResponse, CKANAPIUserhowProps, CKANAPIUserListProps, CKANAPIUserRemoveProps, CKANAPIUserShowResponse, CKANAPIUserTokenCreateProps, CKANAPIUserTokenCreateResponse, CKANAPIUserTokenProps, CKANAPIUserTokenResponse, CKANAPIUserUpdateProps } from './types';
 
 export class CKANUserService {
-
   static get(type: 'list' | 'show' | 'api_token_list', data: Partial<CKANAPIUserhowProps | CKANAPIUserListProps | CKANAPIUserTokenProps>): Promise<CKANAPIUserGetResponse | CKANAPIUserShowResponse | CKANAPIUserTokenResponse> {
     return new Promise((resolve, reject) => {
-      let url;
+      let url: string;
 
       if (type === 'api_token_list')
         url = `${CKANAPIBase.BASE_CKAN_API_URL}/api_token_list?${new URLSearchParams(data as any).toString()}`;
@@ -17,7 +16,7 @@ export class CKANUserService {
       fetch(url, { 'headers': { 'Authorization': CKANAPIBase.API_KEY } })
         .then(res => res.json())
         .then(res => {
-          // console.log('res: ', res);
+          // console.debug('res: ', res);
           if (type === 'list')
             return resolve(res as CKANAPIUserGetResponse);
           else if (type === 'show')
@@ -88,7 +87,7 @@ export class CKANUserService {
       })
         .then(res => res.json())
         .then(res => {
-          console.log('ckan - user - remove: ', res);
+          console.debug('ckan - user - remove: ', res);
           resolve(res);
         })
         .catch(err => {
@@ -114,7 +113,7 @@ export class CKANUserService {
       })
         .then(res => res.json())
         .then(res => {
-          console.log('ckan - user - update: ', res);
+          console.debug('ckan - user - update: ', res);
           resolve(res);
         })
         .catch(err => {
