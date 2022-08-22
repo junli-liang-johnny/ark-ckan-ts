@@ -24,7 +24,7 @@ export class CKANResourceService {
 
   static get<T extends ReturnType>(action: CKANAPIAction, data: Partial<CKANAPIResourceShowProps & CKANAPIResourceSearchProps>, headers?: CKANAPIHeaders): Promise<CKANAPIGetServiceResponse<T>> {
     return new Promise((resolve, reject) => {
-      let url;
+      let url: string;
 
       if (action === 'search')
         url = `${CKANAPIBase.BASE_CKAN_API_URL}/resource_search?${new URLSearchParams(data as any).toString()}`;
@@ -62,7 +62,7 @@ export class CKANResourceService {
       })
         .then(res => res.json())
         .then(res => {
-          console.debug('ckan - resource - create - res: ', res);
+          // console.debug('ckan - resource - create - res: ', res);
           return resolve(res as CKANAPIResourceShowResponse);
         })
         .catch(err => {
@@ -92,7 +92,7 @@ export class CKANResourceService {
       })
         .then(res => res.json())
         .then(res => {
-          console.debug('ckan - resource - create - res: ', res);
+          // console.debug('ckan - resource - create - res: ', res);
           return resolve(res as CKANAPIResourceShowResponse);
         })
         .catch(err => {

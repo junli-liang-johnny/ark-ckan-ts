@@ -18,8 +18,7 @@ export class CKANPackageService {
 
   static get = <T extends ReturnType>(action: CKANAPIAction, data: Partial<CKANAPIPackageShowProps | CKANAPIPackageListProps | CKANAPIPackageSearchProps>, headers?: CKANAPIHeaders): Promise<CKANAPIGetServiceResponse<T>> => {
     return new Promise((resolve, reject) => {
-      console.debug('ckan package - get - data: ', data, ', headers: ', headers);
-
+      // console.debug('ckan package - get - data: ', data, ', headers: ', headers);
       const url = createGetURL(action, data);
 
       nodeFetch(url, { 'headers': { 'Authorization': headers?.Authorization || CKANAPIBase.API_KEY } })
