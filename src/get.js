@@ -1,17 +1,15 @@
+"use strict";
+exports.__esModule = true;
 // import fetch from "node-fetch";
 // import FormData from "form-data";
 // import { CKANAPIBase } from "./base";
-import { CKANAPIBase } from "./base";
-import { CKANAPIOrganisationService } from "./organisation";
-import { CKANAPIOrganisationShowResponse, CKANAPIUser } from "./types";
-import { CKANUserService } from "./user";
+var user_1 = require("./user");
+// import { CKANAPIOrganisationService } from "./organisation";
 // import { CKANPackageService } from "./package";
 // import { CKANResourceService } from "./resource";
-
-const url = "https://openark.adaptcentre.ie/ARKEvidence/api/action";
+// const url = "https://openark.adaptcentre.ie/ARKEvidence/api/action";
 // const url = 'https://demo.ckan.org/api/action';
 // const formData = new FormData();
-
 // create resource
 // const filePath = (path: string) => __dirname + '/' + path;
 // const stats1 = fs.statSync(filePath('foo.csv'));
@@ -22,7 +20,6 @@ const url = "https://openark.adaptcentre.ie/ARKEvidence/api/action";
 // const upload1 = fs.readFileSync(filePath('foo.csv'));
 // const upload2 = fs.readFileSync(filePath('bar.csv'), 'utf8');
 // console.log('upload1: ', upload1);
-
 // formData.append('package_id', '7581a1b4-10b1-43bb-b447-0c35215f4e14');
 // formData.append('description', 'this is a csv file uploaded from node');
 // formData.append('name', 'foobar from node');
@@ -31,27 +28,20 @@ const url = "https://openark.adaptcentre.ie/ARKEvidence/api/action";
 // formData.append('url', 'https://docs.google.com/document/d/1IV2L0IdjM3PLSv_oPjJM30GOWeSweVk1YyNl8Fk2kmM/edit');
 // formData.append('upload', upload1);
 // formData.append('upload', JSON.stringify([upload1, upload2]));
-
 // create user
 // formData.append('id', 'junli');
 // formData.append('name', 'junli');
 // formData.append('email', 'diaopkaique@gmail.com');
 // formData.append('password', '19931214');
-
 // create organisation member
 // formData.append('id', 'trinity-college-dublin');
 // formData.append('username', 'tcduser');
 // formData.append('role', 'member');
-
 // create user api token
 // formData.append('user', 'testuser');
 // formData.append('name', 'ark-evidence');
-
 // revoke api token
 // formData.append('jti', 'ik3xCN0fdOb7Ir-MI6tGyvgLrpKnc2WfPdYGvS8rqPSu_-mwaSQdON6PNSdruPTapOJrc5wVQ6xzcqWX');
-const apiToken =
-	"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJtOWdESHh0SlRKb3JMWl9sZVdsSmNOczVzRUhFeVRHVm1UVTRJUi04S21nRXBCOHBGVkJHWm1tcFVBbGVNNlZ0aEFKR2Y4c1BMNmdFRDcxRCIsImlhdCI6MTcxNTA5NTU1OX0.SO8BggJzk0sWO7Mu-qPO73jPPFtlLMVEjlq-VC1znxQ";
-
 // fetch(url + '/group_show?id=se-opengov')
 // fetch('https://demo.ckan.org/api/3/action/group_show?id=test-group')
 // fetch('https://demo.ckan.org/api/3/action/group_list')
@@ -59,20 +49,12 @@ const apiToken =
 // fetch(url + '/package_show?id=ark-ui-design', { headers: { 'Authorization': "tYrilv0SAgqtxUL19EOHcGcLzi9TcIq5fu-sGuKpw2-jLtUV_nLllbsWC0q-A-ZbeaTzew41ZyOVuE0-" } })
 // fetch(url + '/package_show?id=e89d59e8-6665-49b9-b431-d2adcea2dba3', { headers: { 'Authorization': CKANAPIBase.API_KEY } })
 // fetch(url + '/package_show?id=9a42f4e8-0bb3-42db-bf99-2a2a3f33ff0b', { headers: { 'Authorization': CKANAPIBase.API_KEY } })
-// fetch(url + "/package_list", { headers: { Authorization: apiToken } })
-fetch(url + "/package_list", {
-	headers: { Authorization: CKANAPIBase.API_KEY },
-})
-	.then((res) => res.json())
-	.then((res) => console.log("res: ", res));
+// fetch(url + '/package_list', { 'headers': { 'Authorization': testuserAPIKey } })
+// fetch(url + '/package_list', { 'headers': { 'Authorization': CKANAPIBase.API_KEY } })
 // fetch(url + '/member_list?id=ukgov')
 // fetch(url + '/organization_show?id=trinity-college-dublin&include_users=true')
 // fetch(url + '/organization_show?id=st-james-hospital&include_users=true')
-// fetch(url + "/organization_list?all_fields=true")
-// 	.then((res) => res.json())
-// 	.then((res) => {
-// 		console.log("res: ", res);
-// 	});
+// fetch(url + '/organization_list?all_fields=true')
 // fetch(url + '/package_search?include_private=true&q=', { 'headers': { 'Authorization': CKANAPIBase.API_KEY } }) // search package with organisation
 // fetch(url + '/package_search?', { 'headers': { 'Authorization': "tYrilv0SAgqtxUL19EOHcGcLzi9TcIq5fu-sGuKpw2-jLtUV_nLllbsWC0q-A-ZbeaTzew41ZyOVuE0-" } }) // search package with organisation
 // fetch(url + '/package_search?include_private=true', { 'headers': { 'Authorization': CKANAPIBase.API_KEY } }) // search package with organisation
@@ -116,43 +98,13 @@ fetch(url + "/package_list", {
 //   console.log('res: ', res);
 // })
 // .catch(err => console.error(err));
-
-// organisation services
 // CKANAPIOrganisationService.create('member_create', { username: "tcduesr", role: "editor", id: "trinity-college-dublin" });
-// CKANAPIOrganisationService.get("show", {
-// 	id: "university-college-dublin",
-// 	include_users: true,
-// }).then((res) => {
-// 	console.log("res: ", res);
-// 	(res as CKANAPIOrganisationShowResponse).result.users.forEach(
-// 		(user: CKANAPIUser) => {
-// 			console.log("user: ", user);
-// 		}
-// 	);
-// });
-
-// user services
-// CKANUserService.get("list", {
-// 	email: "haula.galadima@ucdconnect.ie",
-// }).then((res) => {
-// 	console.log("res: ", res);
-// });
-
-// CKANUserService.update({
-// 	id: "junli",
-// 	email: "junli.liang@adaptcentre.ie",
-// }).then((res) => {
-// 	console.log("res: ", res);
-// });
-
-// CKANUserService.create("user_create", {
-// 	id: "haula_galadima",
-// 	name: "haula_galadima",
-// 	fullname: "Haula Galadima",
-// 	email: "haula.galadima@ucdconnect.ie",
-// 	password: "9dw7QBUwjgvPLNB6",
-// }).then((res) => console.log("res: ", res));
-
+user_1.CKANUserService.get("list", {
+    q: "junli"
+}).then(function (res) {
+    console.log("res: ", res);
+});
+// CKANUserService.update({ 'id': 'junli', 'password': '19931214', 'email': 'diaopkaique@gmail.com' });
 // CKANResourceService.create({
 //   'package_id': '7581a1b4-10b1-43bb-b447-0c35215f4e14',
 //   'description': 'this is a csv file uploaded from node',
