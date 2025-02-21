@@ -3,7 +3,7 @@ import {
 	CKANAPIResponse,
 	CKANAPITokenRevokeProps,
 	CKANAPIUserCreateProps,
-	CKANAPIUserGetResponse,
+	CKANAPIUserListResponse,
 	CKANAPIUserhowProps,
 	CKANAPIUserListProps,
 	CKANAPIUserRemoveProps,
@@ -22,7 +22,7 @@ export class CKANUserService {
 			CKANAPIUserhowProps | CKANAPIUserListProps | CKANAPIUserTokenProps
 		>
 	): Promise<
-		CKANAPIUserGetResponse | CKANAPIUserShowResponse | CKANAPIUserTokenResponse
+		CKANAPIUserListResponse | CKANAPIUserShowResponse | CKANAPIUserTokenResponse
 	> {
 		return new Promise((resolve, reject) => {
 			let url;
@@ -44,7 +44,7 @@ export class CKANUserService {
 				.then((res) => res.json())
 				.then((res) => {
 					// console.log('res: ', res);
-					if (type === "list") return resolve(res as CKANAPIUserGetResponse);
+					if (type === "list") return resolve(res as CKANAPIUserListResponse);
 					else if (type === "show")
 						return resolve(res as CKANAPIUserShowResponse);
 					else return resolve(res as CKANAPIUserTokenResponse);

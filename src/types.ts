@@ -16,6 +16,10 @@ export interface CKANAPIShowResponse extends CKANAPIResponse {
 	result: Object;
 }
 
+interface CKANAPIListResponse<T> extends CKANAPIResponse {
+	result: T[];
+}
+
 export interface CKANAPIOrganisation {
 	id: string;
 	name: string;
@@ -377,7 +381,7 @@ export interface CKANAPIUserRemoveProps {
 	id: string;
 }
 
-export interface CKANAPIUserGetResponse
+export interface CKANAPIUserListResponse
 	extends Omit<CKANAPIGetListResponse, "result"> {
 	result: CKANAPIUser[];
 }
@@ -466,6 +470,7 @@ export interface CKANAPIOrganisationShowResponse extends CKANAPIShowResponse {
 // version 2
 export interface CKANServiceInterface {
 	url: string;
+	_headers: HeadersInit;
 	auth?: string;
 	create: Function;
 	show: Function;
@@ -485,3 +490,7 @@ export interface CKANPackageListResponse extends CKANAPIGetListResponse {}
 export interface CKANUserServiceInterface extends CKANServiceInterface {
 	delete: Function;
 }
+
+// organisation interface
+export interface CKANOrganisationListResponse
+	extends CKANAPIListResponse<CKANAPIOrganisation> {}

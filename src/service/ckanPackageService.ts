@@ -1,19 +1,15 @@
-import { CKANPackageServiceInterface, CKANPackageListResponse } from "../types";
+import { CKANPackageListResponse } from "../types";
+import CKANService from "./ckanService";
 
-class CKANPackageService implements CKANPackageServiceInterface {
-	url: string;
-	auth?: string | undefined;
-
+class CKANPackageService extends CKANService {
 	constructor(url: string, auth?: string) {
-		this.url = url;
-		this.auth = auth;
+		super(url, auth);
 	}
 
-	show() {}
+	// show() {}
 
 	list(data?: { limit?: number; offset?: number }) {
 		return new Promise<CKANPackageListResponse>((resolve, reject) => {
-			const headers = { Authorization: this.auth } as HeadersInit;
 			const _data = Object.entries(data || {}).reduce((acc, [key, value]) => {
 				return { ...acc, [key]: String(value) };
 			}, {});
@@ -23,13 +19,14 @@ class CKANPackageService implements CKANPackageServiceInterface {
 
 			fetch(_url, {
 				method: "GET",
-				headers,
+				headers: this._headers,
 			})
 				.then((res) => {
 					if (res.ok) return res.json();
 					else {
 						console.error("Failed to fetch, res: ", res.statusText);
-						return reject(res.statusText);
+						// return reject(res.statusText);
+						return res.json();
 					}
 				})
 				.then((res: CKANPackageListResponse) => {
@@ -42,12 +39,12 @@ class CKANPackageService implements CKANPackageServiceInterface {
 		});
 	}
 
-	search() {}
+	// search() {}
 
-	update() {}
+	// update() {}
 
-	autocomplete() {}
-	create() {}
+	// autocomplete() {}
+	// create() {}
 }
 
 export default CKANPackageService;

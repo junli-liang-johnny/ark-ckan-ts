@@ -7,7 +7,7 @@ var user_1 = require("./user");
 // import { CKANAPIOrganisationService } from "./organisation";
 // import { CKANPackageService } from "./package";
 // import { CKANResourceService } from "./resource";
-// const url = "https://openark.adaptcentre.ie/ARKEvidence/api/action";
+// const url = "https://ark-evidence.adaptcentre.ie/api/action";
 // const url = 'https://demo.ckan.org/api/action';
 // const formData = new FormData();
 // create resource
@@ -100,9 +100,9 @@ var user_1 = require("./user");
 // .catch(err => console.error(err));
 // CKANAPIOrganisationService.create('member_create', { username: "tcduesr", role: "editor", id: "trinity-college-dublin" });
 user_1.CKANUserService.get("list", {
-    q: "junli"
+	q: "junli",
 }).then(function (res) {
-    console.log("res: ", res);
+	console.log("res: ", res);
 });
 // CKANUserService.update({ 'id': 'junli', 'password': '19931214', 'email': 'diaopkaique@gmail.com' });
 // CKANResourceService.create({

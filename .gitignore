@@ -3,3 +3,5 @@ node_modules
 /target
 tsconfig.tsbuildinfo
 ckan.config.json
+ckanTest.config.json
+output.json

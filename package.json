@@ -6,7 +6,7 @@
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"scripts": {
-		"test": "jest --watch",
+		"test": "jest --watch --json --outputFile=output.json",
 		"build": "tsc --build"
 	},
 	"keywords": [],

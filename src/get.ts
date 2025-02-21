@@ -8,7 +8,7 @@ import { CKANUserService } from "./user";
 // import { CKANPackageService } from "./package";
 // import { CKANResourceService } from "./resource";
 
-const url = "https://openark.adaptcentre.ie/ARKEvidence/api/action";
+const url = "https://ark-evidence.adaptcentre.ie/api/action";
 // const url = 'https://demo.ckan.org/api/action';
 // const formData = new FormData();
 
