@@ -1,4 +1,4 @@
-import { CKANAPIBase } from ".";
+import { CKANAPIBase } from "./";
 import {
 	CKANAPIResponse,
 	CKANAPITokenRevokeProps,
@@ -40,6 +40,11 @@ export class CKANUserService {
 					data as any
 				).toString()}`;
 
+			console.log("");
+
+			const { API_KEY, API_KEY_ID } = CKANAPIBase;
+			console.log("API_KEY: ", API_KEY, "API_KEY_ID: ", API_KEY_ID);
+
 			fetch(url, { headers: { Authorization: CKANAPIBase.API_KEY } })
 				.then((res) => res.json())
 				.then((res) => {
@@ -62,7 +67,6 @@ export class CKANUserService {
 	): Promise<CKANAPIUserShowResponse | CKANAPIUserTokenCreateResponse> {
 		return new Promise((resolve, reject) => {
 			const formData = new FormData();
-			// const formData = new NodeFormData();
 			Object.entries(data).forEach(([key, val]) => formData.append(key, val));
 
 			let url;

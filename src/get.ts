@@ -78,17 +78,15 @@ const apiToken = "";
 // fetch(url + '/package_search?include_private=true') // search package with organisation
 // fetch(url + '/package_search?include_private=true&q=ark&fq=organization:dublin-city-university', { 'headers': { 'Authorization': CKANAPIBase.API_KEY } }) // search package with organisation
 // fetch(url + '/package_collaborator_list?id=ark-ui-design', { 'headers': { 'Authorization': CKANAPIBase.API_KEY } })
-const formData = new FormData();
-formData.append("order_by", "sysadmin");
-fetch(url + "/user_list", {
-	method: "POST",
-	headers: {
-		Authorization: CKANAPIBase.API_KEY,
-	},
-	body: formData,
-})
-	.then((res) => res.json())
-	.then((res) => console.log(res)); // list all users
+// fetch(url + "/user_list", {
+// 	method: "POST",
+// 	headers: {
+// 		Authorization: CKANAPIBase.API_KEY,
+// 	},
+// 	body: formData,
+// })
+// 	.then((res) => res.json())
+// 	.then((res) => console.log(res)); // list all users
 // fetch(url + '/user_create', { 'method': 'POST', 'headers': { 'Authorization': CKANAPIBase.API_KEY }, 'body': formData })
 // fetch(url + '/user_show?id=testuser&include_datasets=true&include_num_followers=true&include_password_hash=true&include_plugin_extras=true', { headers: { 'Authorization': CKANAPIBase.API_KEY } }) // list all users
 // fetch(url + '/resource_show?id=53c18e09-909e-456a-9b46-546e791cd943')
@@ -97,10 +95,11 @@ fetch(url + "/user_list", {
 // fetch(url + '/resource_search?query=package_id:7581a1b4-10b1-43bb-b447-0c35215f4e14')
 // fetch(url + '/organization_member_create', { 'method': 'POST', 'headers': { 'Authorization': CKANAPIBase.API_KEY }, 'body': formData })
 // fetch(url + '/api_token_list?user=testuser', { 'headers': { 'Authorization': CKANAPIBase.API_KEY } })
-// fetch(url + "/api_token_list?user=junli", {
-// 	headers: { Authorization: apiToken },
-// })
-// 	.then((res) => res.json())
+fetch(url + "/api_token_list?user=junli", {
+	headers: { Authorization: CKANAPIBase.API_KEY },
+})
+	.then((res) => res.json())
+	.then((res) => console.log("res: ", res));
 // 	.then((res) => {
 // 		const list = res.result as Array<any>;
 // 		console.log("Total tokens: ", list.length);
