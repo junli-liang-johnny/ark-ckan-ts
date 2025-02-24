@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CKANUserService = void 0;
-var _1 = require(".");
+var _1 = require("./");
 var CKANUserService = /** @class */ (function () {
     function CKANUserService() {
     }
@@ -14,6 +14,9 @@ var CKANUserService = /** @class */ (function () {
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/user_show?").concat(new URLSearchParams(data).toString());
             else
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/user_list?").concat(new URLSearchParams(data).toString());
+            console.log("");
+            var API_KEY = _1.CKANAPIBase.API_KEY, API_KEY_ID = _1.CKANAPIBase.API_KEY_ID;
+            console.log("API_KEY: ", API_KEY, "API_KEY_ID: ", API_KEY_ID);
             fetch(url, { headers: { Authorization: _1.CKANAPIBase.API_KEY } })
                 .then(function (res) { return res.json(); })
                 .then(function (res) {
@@ -34,7 +37,6 @@ var CKANUserService = /** @class */ (function () {
     CKANUserService.create = function (type, data) {
         return new Promise(function (resolve, reject) {
             var formData = new FormData();
-            // const formData = new NodeFormData();
             Object.entries(data).forEach(function (_a) {
                 var key = _a[0], val = _a[1];
                 return formData.append(key, val);
