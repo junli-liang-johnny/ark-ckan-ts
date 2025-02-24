@@ -16,19 +16,23 @@ var CKANResourceService = /** @class */ (function () {
     CKANResourceService.get = function (action, data, headers) {
         return new Promise(function (resolve, reject) {
             var url;
-            if (action === 'search')
+            if (action === "search")
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/resource_search?").concat(new URLSearchParams(data).toString());
-            else if (action === 'show')
+            else if (action === "show")
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/resource_show?").concat(new URLSearchParams(data).toString());
             else
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/resource_show?").concat(new URLSearchParams(data).toString());
-            (0, node_fetch_1.default)(url, { 'headers': { 'Authorization': (headers === null || headers === void 0 ? void 0 : headers.Authorization) || _1.CKANAPIBase.API_KEY } })
+            (0, node_fetch_1.default)(url, {
+                headers: {
+                    Authorization: (headers === null || headers === void 0 ? void 0 : headers.Authorization) || _1.CKANAPIBase.API_KEY,
+                },
+            })
                 .then(function (res) { return res.json(); })
                 .then(function (res) {
                 return resolve(res);
             })
                 .catch(function (err) {
-                console.error('ckan - resource - get - err: ', err);
+                console.error("ckan - resource - get - err: ", err);
                 reject(err);
             });
         });
@@ -44,25 +48,24 @@ var CKANResourceService = /** @class */ (function () {
                 return formData.append(key, val);
             });
             (0, node_fetch_1.default)(url, {
-                'method': 'POST',
-                'headers': {
-                    'Authorization': _1.CKANAPIBase.API_KEY,
+                method: "POST",
+                headers: {
+                    Authorization: _1.CKANAPIBase.API_KEY,
                 },
-                'body': formData
+                body: formData,
             })
                 .then(function (res) { return res.json(); })
                 .then(function (res) {
-                console.log('ckan - resource - create - res: ', res);
+                console.log("ckan - resource - create - res: ", res);
                 return resolve(res);
             })
                 .catch(function (err) {
-                console.error('ckan - resource - create - err: ', err);
+                console.error("ckan - resource - create - err: ", err);
                 reject(err);
             });
         });
     };
-    CKANResourceService.remove = function () {
-    };
+    CKANResourceService.remove = function () { };
     CKANResourceService.update = function (data) {
         return new Promise(function (resolve, reject) {
             var url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/resource_update");
@@ -73,19 +76,19 @@ var CKANResourceService = /** @class */ (function () {
                 return formData.append(key, val);
             });
             fetch(url, {
-                'method': 'POST',
-                'headers': {
-                    'Authorization': _1.CKANAPIBase.API_KEY
+                method: "POST",
+                headers: {
+                    Authorization: _1.CKANAPIBase.API_KEY,
                 },
-                'body': formData
+                body: formData,
             })
                 .then(function (res) { return res.json(); })
                 .then(function (res) {
-                console.log('ckan - resource - create - res: ', res);
+                console.log("ckan - resource - create - res: ", res);
                 return resolve(res);
             })
                 .catch(function (err) {
-                console.error('ckan - resource - create - err: ', err);
+                console.error("ckan - resource - create - err: ", err);
                 reject(err);
             });
         });
@@ -93,11 +96,11 @@ var CKANResourceService = /** @class */ (function () {
     CKANResourceService.isDcatDistributionURL = function (id) {
         if (!id)
             return false;
-        return id.includes('resource') && id.includes('dataset');
+        return id.includes("resource") && id.includes("dataset");
     };
     CKANResourceService.extractPackageId = function (id) {
-        var split = id.split('/');
-        var packageIndex = split.indexOf('dataset');
+        var split = id.split("/");
+        var packageIndex = split.indexOf("dataset");
         return split[packageIndex + 1];
     };
     return CKANResourceService;

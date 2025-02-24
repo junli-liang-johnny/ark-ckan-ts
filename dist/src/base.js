@@ -41,29 +41,25 @@ var _1 = require(".");
 var user_1 = require("./user");
 var uuid_1 = require("uuid");
 var ckan_config_json_1 = require("../ckan.config.json");
-exports.CKAN_API_TOKEN_LOCALSTORAGE_KEY = 'ckan_api_token_key';
+exports.CKAN_API_TOKEN_LOCALSTORAGE_KEY = "ckan_api_token_key";
 var CKANAPIBase = /** @class */ (function () {
     function CKANAPIBase() {
     }
-    CKANAPIBase.get = function () {
-    };
-    CKANAPIBase.create = function () {
-    };
-    CKANAPIBase.update = function () {
-    };
-    CKANAPIBase.remove = function () {
-    };
+    CKANAPIBase.get = function () { };
+    CKANAPIBase.create = function () { };
+    CKANAPIBase.update = function () { };
+    CKANAPIBase.remove = function () { };
     CKANAPIBase.BASE_CKAN_URL = ckan_config_json_1.ckan_url;
     CKANAPIBase.BASE_CKAN_API_URL = ckan_config_json_1.ckan_api_url;
     CKANAPIBase.API_KEY = ckan_config_json_1.api_key;
     CKANAPIBase.API_KEY_ID = ckan_config_json_1.api_key_id;
     CKANAPIBase.extreactIdFromURL = function (url) {
         try {
-            var split = url.split('/');
+            var split = url.split("/");
             return split[split.length - 1];
         }
         catch (err) {
-            console.error('extractIdFromURL - err: ', err);
+            console.error("extractIdFromURL - err: ", err);
         }
     };
     return CKANAPIBase;
@@ -78,7 +74,7 @@ var loadCKANDataset = function (username, onOneDataLoaded, onFinish) { return __
                 return [4 /*yield*/, (0, exports.getUserAPIToken)(username)];
             case 1:
                 apiToken = _b.sent();
-                return [4 /*yield*/, _1.CKANPackageService.get('list', { 'include_private': true, 'limit': 5 }, { 'Authorization': apiToken })];
+                return [4 /*yield*/, _1.CKANPackageService.get("list", { include_private: true, limit: 5 }, { Authorization: apiToken })];
             case 2:
                 res = _b.sent();
                 evidenceList = res.result;
@@ -88,7 +84,7 @@ var loadCKANDataset = function (username, onOneDataLoaded, onFinish) { return __
             case 3:
                 if (!(_i < _a.length)) return [3 /*break*/, 6];
                 el = _a[_i];
-                return [4 /*yield*/, _1.CKANPackageService.get('show', { 'id': el })];
+                return [4 /*yield*/, _1.CKANPackageService.get("show", { id: el })];
             case 4:
                 obj = _b.sent();
                 evidence.push(obj.result);
@@ -104,7 +100,7 @@ var loadCKANDataset = function (username, onOneDataLoaded, onFinish) { return __
                 return [3 /*break*/, 8];
             case 7:
                 err_1 = _b.sent();
-                console.log('loadCKANDataset - err: ', err_1);
+                console.log("loadCKANDataset - err: ", err_1);
                 if (onFinish)
                     onFinish([]);
                 return [3 /*break*/, 8];
@@ -122,7 +118,7 @@ var loadCKANDatasetSync = function (username, onOneDataLoaded) { return __awaite
                 return [4 /*yield*/, (0, exports.getUserAPIToken)(username)];
             case 1:
                 apiToken = _b.sent();
-                return [4 /*yield*/, _1.CKANPackageService.get('list', { 'include_private': true, 'limit': 5 }, { 'Authorization': apiToken })];
+                return [4 /*yield*/, _1.CKANPackageService.get("list", { include_private: true, limit: 5 }, { Authorization: apiToken })];
             case 2:
                 res = _b.sent();
                 evidenceList = res.result;
@@ -132,7 +128,7 @@ var loadCKANDatasetSync = function (username, onOneDataLoaded) { return __awaite
             case 3:
                 if (!(_i < _a.length)) return [3 /*break*/, 6];
                 el = _a[_i];
-                return [4 /*yield*/, _1.CKANPackageService.get('show', { 'id': el })];
+                return [4 /*yield*/, _1.CKANPackageService.get("show", { id: el })];
             case 4:
                 obj = _b.sent();
                 evidence.push(obj.result);
@@ -145,7 +141,7 @@ var loadCKANDatasetSync = function (username, onOneDataLoaded) { return __awaite
             case 6: return [2 /*return*/, evidence];
             case 7:
                 err_2 = _b.sent();
-                console.log('loadCKANDataset - err: ', err_2);
+                console.log("loadCKANDataset - err: ", err_2);
                 return [2 /*return*/, []];
             case 8: return [2 /*return*/];
         }
@@ -161,8 +157,10 @@ var searchCKANDataset = function (username, data, callback) { return __awaiter(v
                 return [4 /*yield*/, (0, exports.getUserAPIToken)(username)];
             case 1:
                 apiToken = _a.sent();
-                console.log('ckan - searchCKANDataset - apiToken: ', apiToken);
-                return [4 /*yield*/, _1.CKANPackageService.get('search', data, { 'Authorization': apiToken })];
+                console.log("ckan - searchCKANDataset - apiToken: ", apiToken);
+                return [4 /*yield*/, _1.CKANPackageService.get("search", data, {
+                        Authorization: apiToken,
+                    })];
             case 2:
                 res = _a.sent();
                 evidence = res.result.results;
@@ -171,7 +169,7 @@ var searchCKANDataset = function (username, data, callback) { return __awaiter(v
                 return [3 /*break*/, 4];
             case 3:
                 err_3 = _a.sent();
-                console.log('searchCKANDataset - err: ', err_3);
+                console.log("searchCKANDataset - err: ", err_3);
                 if (callback)
                     callback([]);
                 return [3 /*break*/, 4];
@@ -189,15 +187,17 @@ var searchCKANDatasetSync = function (username, data) { return __awaiter(void 0,
                 return [4 /*yield*/, (0, exports.getUserAPIToken)(username)];
             case 1:
                 apiToken = _a.sent();
-                console.log('ckan - searchCKANDataset - apiToken: ', apiToken);
-                return [4 /*yield*/, _1.CKANPackageService.get('search', data, { 'Authorization': apiToken })];
+                console.log("ckan - searchCKANDataset - apiToken: ", apiToken);
+                return [4 /*yield*/, _1.CKANPackageService.get("search", data, {
+                        Authorization: apiToken,
+                    })];
             case 2:
                 res = _a.sent();
                 evidence = res.result.results;
                 return [2 /*return*/, evidence];
             case 3:
                 err_4 = _a.sent();
-                console.log('searchCKANDataset - err: ', err_4);
+                console.log("searchCKANDataset - err: ", err_4);
                 return [2 /*return*/, []];
             case 4: return [2 /*return*/];
         }
@@ -213,15 +213,17 @@ var getCKANDatasetAutocomplete = function (username, data) { return __awaiter(vo
                 return [4 /*yield*/, (0, exports.getUserAPIToken)(username)];
             case 1:
                 apiToken = _a.sent();
-                console.log('ckan - searchCKANDataset - apiToken: ', apiToken);
-                return [4 /*yield*/, _1.CKANPackageService.get('autocomplete', data, { 'Authorization': apiToken })];
+                console.log("ckan - searchCKANDataset - apiToken: ", apiToken);
+                return [4 /*yield*/, _1.CKANPackageService.get("autocomplete", data, {
+                        Authorization: apiToken,
+                    })];
             case 2:
                 res = _a.sent();
                 evidence = res.result;
                 return [2 /*return*/, evidence];
             case 3:
                 err_5 = _a.sent();
-                console.log('searchCKANDataset - err: ', err_5);
+                console.log("searchCKANDataset - err: ", err_5);
                 return [2 /*return*/, []];
             case 4: return [2 /*return*/];
         }
@@ -249,7 +251,7 @@ var getUserAPIToken = function (username, admin, callback) { return __awaiter(vo
             case 3: return [3 /*break*/, 5];
             case 4:
                 err_6 = _a.sent();
-                console.error('ckan - getUserAPIToken - err: ', err_6);
+                console.error("ckan - getUserAPIToken - err: ", err_6);
                 return [2 /*return*/, undefined];
             case 5: return [2 /*return*/];
         }
@@ -262,14 +264,17 @@ var requestAPIToken = function (username) { return __awaiter(void 0, void 0, voi
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, user_1.CKANUserService.create('api_token_create', { 'user': username, 'name': (0, uuid_1.v4)() })];
+                return [4 /*yield*/, user_1.CKANUserService.create("api_token_create", {
+                        user: username,
+                        name: (0, uuid_1.v4)(),
+                    })];
             case 1:
                 res = _a.sent();
-                console.log('ckan - requestAPIToken - res: ', res);
+                console.log("ckan - requestAPIToken - res: ", res);
                 return [2 /*return*/, res.result.token];
             case 2:
                 err_7 = _a.sent();
-                console.error('ckan - requestAPIToken - err: ', err_7);
+                console.error("ckan - requestAPIToken - err: ", err_7);
                 return [2 /*return*/, undefined];
             case 3: return [2 /*return*/];
         }
@@ -282,14 +287,14 @@ var getUserAPITokenList = function (username) { return __awaiter(void 0, void 0,
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, user_1.CKANUserService.get('api_token_list', { 'user': username })];
+                return [4 /*yield*/, user_1.CKANUserService.get("api_token_list", { user: username })];
             case 1:
                 res = _a.sent();
-                console.log('ckan - getUserAPITokenList - res: ', res);
+                console.log("ckan - getUserAPITokenList - res: ", res);
                 return [2 /*return*/, res.result];
             case 2:
                 err_8 = _a.sent();
-                console.error('ckan - getUserAPITokenList - err: ', err_8);
+                console.error("ckan - getUserAPITokenList - err: ", err_8);
                 return [2 /*return*/, undefined];
             case 3: return [2 /*return*/];
         }
@@ -302,14 +307,14 @@ var revokeUserAPIToken = function (data) { return __awaiter(void 0, void 0, void
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, user_1.CKANUserService.remove('api_token_revoke', data)];
+                return [4 /*yield*/, user_1.CKANUserService.remove("api_token_revoke", data)];
             case 1:
                 res = _a.sent();
-                console.log('ckan - getUserAPITokenList - res: ', res);
+                console.log("ckan - getUserAPITokenList - res: ", res);
                 return [2 /*return*/, res.success];
             case 2:
                 err_9 = _a.sent();
-                console.error('ckan - getUserAPITokenList - err: ', err_9);
+                console.error("ckan - getUserAPITokenList - err: ", err_9);
                 return [2 /*return*/, false];
             case 3: return [2 /*return*/];
         }

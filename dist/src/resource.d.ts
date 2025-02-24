@@ -1,4 +1,4 @@
-import { CKANAPIHeaders, CKANAPIAction, CKANAPIGetServiceResponse, CKANAPIResourceCreateProps, CKANAPIResourceSearchProps, CKANAPIResourceSearchResponse, CKANAPIResourceShowProps, CKANAPIResourceShowResponse, CKANAPIResourceUpdateProps } from './types';
+import { CKANAPIHeaders, CKANAPIAction, CKANAPIGetServiceResponse, CKANAPIResourceCreateProps, CKANAPIResourceSearchProps, CKANAPIResourceSearchResponse, CKANAPIResourceShowProps, CKANAPIResourceShowResponse, CKANAPIResourceUpdateProps } from "./types";
 type ReturnType = CKANAPIResourceShowResponse | CKANAPIResourceSearchResponse;
 export declare class CKANResourceService {
     static dcatDistributionURL(datasetId: string, resourceId: string): string;

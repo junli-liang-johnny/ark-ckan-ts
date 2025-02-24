@@ -1,5 +1,5 @@
-import { CKANAPIPackageSearchProps } from '.';
-import { CKANAPIPackage, CKANAPIToken } from './types';
+import { CKANAPIPackageSearchProps } from ".";
+import { CKANAPIPackage, CKANAPIToken } from "./types";
 export declare const CKAN_API_TOKEN_LOCALSTORAGE_KEY = "ckan_api_token_key";
 export declare class CKANAPIBase {
     static BASE_CKAN_URL: string;

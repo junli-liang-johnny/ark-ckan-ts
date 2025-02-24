@@ -8,25 +8,25 @@ var CKANUserService = /** @class */ (function () {
     CKANUserService.get = function (type, data) {
         return new Promise(function (resolve, reject) {
             var url;
-            if (type === 'api_token_list')
+            if (type === "api_token_list")
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/api_token_list?").concat(new URLSearchParams(data).toString());
-            else if (type === 'show')
+            else if (type === "show")
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/user_show?").concat(new URLSearchParams(data).toString());
             else
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/user_list?").concat(new URLSearchParams(data).toString());
-            fetch(url, { 'headers': { 'Authorization': _1.CKANAPIBase.API_KEY } })
+            fetch(url, { headers: { Authorization: _1.CKANAPIBase.API_KEY } })
                 .then(function (res) { return res.json(); })
                 .then(function (res) {
                 // console.log('res: ', res);
-                if (type === 'list')
+                if (type === "list")
                     return resolve(res);
-                else if (type === 'show')
+                else if (type === "show")
                     return resolve(res);
                 else
                     return resolve(res);
             })
                 .catch(function (err) {
-                console.error('ckan - user - get - err: ', err);
+                console.error("ckan - user - get - err: ", err);
                 reject(err);
             });
         });
@@ -40,26 +40,26 @@ var CKANUserService = /** @class */ (function () {
                 return formData.append(key, val);
             });
             var url;
-            if (type === 'user_create')
+            if (type === "user_create")
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/user_create");
             else
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/api_token_create?").concat(new URLSearchParams(data).toString());
             fetch(url, {
-                'method': 'POST',
-                'headers': {
-                    'Authorization': _1.CKANAPIBase.API_KEY
+                method: "POST",
+                headers: {
+                    Authorization: _1.CKANAPIBase.API_KEY,
                 },
-                'body': formData
+                body: formData,
             })
                 .then(function (res) { return res.json(); })
                 .then(function (res) {
-                if (type === 'user_create')
+                if (type === "user_create")
                     resolve(res);
                 else
                     resolve(res);
             })
                 .catch(function (err) {
-                console.error('ckan - user - create - err: ', err);
+                console.error("ckan - user - create - err: ", err);
                 reject(err);
             });
         });
@@ -69,9 +69,9 @@ var CKANUserService = /** @class */ (function () {
             var url;
             var formData = new FormData();
             // const formData = new NodeFormData();
-            if (type === 'user_remove') {
+            if (type === "user_remove") {
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/user_delete?").concat(new URLSearchParams(data).toString());
-                formData.append('id', data.id);
+                formData.append("id", data.id);
             }
             else {
                 url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/api_token_revoke");
@@ -81,19 +81,19 @@ var CKANUserService = /** @class */ (function () {
                 });
             }
             fetch(url, {
-                'method': 'POST',
-                'headers': {
-                    'Authorization': _1.CKANAPIBase.API_KEY
+                method: "POST",
+                headers: {
+                    Authorization: _1.CKANAPIBase.API_KEY,
                 },
-                body: formData
+                body: formData,
             })
                 .then(function (res) { return res.json(); })
                 .then(function (res) {
-                console.log('ckan - user - remove: ', res);
+                console.log("ckan - user - remove: ", res);
                 resolve(res);
             })
                 .catch(function (err) {
-                console.error('ckan - user - remove - err: ', err);
+                console.error("ckan - user - remove - err: ", err);
                 reject(err);
             });
         });
@@ -108,19 +108,19 @@ var CKANUserService = /** @class */ (function () {
                 return formData.append(key, val);
             });
             fetch(url, {
-                'method': 'POST',
-                'headers': {
-                    'Authorization': _1.CKANAPIBase.API_KEY
+                method: "POST",
+                headers: {
+                    Authorization: _1.CKANAPIBase.API_KEY,
                 },
-                'body': formData
+                body: formData,
             })
                 .then(function (res) { return res.json(); })
                 .then(function (res) {
-                console.log('ckan - user - update: ', res);
+                console.log("ckan - user - update: ", res);
                 resolve(res);
             })
                 .catch(function (err) {
-                console.error('ckan - user - update - err: ', err);
+                console.error("ckan - user - update - err: ", err);
                 reject(err);
             });
         });
