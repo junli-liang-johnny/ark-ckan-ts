@@ -1,6 +1,5 @@
 import nodeFetch from "node-fetch";
-import NodeFormData from "form-data";
-import { CKANAPIBase } from ".";
+import { CKANAPIBase, CKANAPIBaseProps } from "./";
 import {
 	CKANAPIHeaders,
 	CKANAPIAction,
@@ -15,9 +14,13 @@ import {
 
 type ReturnType = CKANAPIResourceShowResponse | CKANAPIResourceSearchResponse;
 
-export class CKANResourceService {
-	static dcatDistributionURL(datasetId: string, resourceId: string) {
-		return `${CKANAPIBase.BASE_CKAN_URL}/dataset/${datasetId}/resource/${resourceId}`;
+export class CKANResourceService extends CKANAPIBase {
+	constructor(props: CKANAPIBaseProps) {
+		super(props);
+	}
+
+	dcatDistributionURL(datasetId: string, resourceId: string) {
+		return `${this.BASE_CKAN_URL}/dataset/${datasetId}/resource/${resourceId}`;
 	}
 
 	static isDcatDistributionURL = (id: string | undefined) => {
@@ -31,7 +34,7 @@ export class CKANResourceService {
 		return split[packageIndex + 1];
 	};
 
-	static get<T extends ReturnType>(
+	get<T extends ReturnType>(
 		action: CKANAPIAction,
 		data: Partial<CKANAPIResourceShowProps & CKANAPIResourceSearchProps>,
 		headers?: CKANAPIHeaders
@@ -40,21 +43,21 @@ export class CKANResourceService {
 			let url;
 
 			if (action === "search")
-				url = `${
-					CKANAPIBase.BASE_CKAN_API_URL
-				}/resource_search?${new URLSearchParams(data as any).toString()}`;
+				url = `${this.BASE_CKAN_API_URL}/resource_search?${new URLSearchParams(
+					data as any
+				).toString()}`;
 			else if (action === "show")
-				url = `${
-					CKANAPIBase.BASE_CKAN_API_URL
-				}/resource_show?${new URLSearchParams(data as any).toString()}`;
+				url = `${this.BASE_CKAN_API_URL}/resource_show?${new URLSearchParams(
+					data as any
+				).toString()}`;
 			else
-				url = `${
-					CKANAPIBase.BASE_CKAN_API_URL
-				}/resource_show?${new URLSearchParams(data as any).toString()}`;
+				url = `${this.BASE_CKAN_API_URL}/resource_show?${new URLSearchParams(
+					data as any
+				).toString()}`;
 
-			nodeFetch(url, {
+			fetch(url, {
 				headers: {
-					Authorization: headers?.Authorization || CKANAPIBase.API_KEY,
+					Authorization: headers?.Authorization || this.API_KEY,
 				},
 			})
 				.then((res) => res.json())
@@ -69,19 +72,18 @@ export class CKANResourceService {
 	}
 
 	// upload not working on nodejs
-	static create(
+	create(
 		data: CKANAPIResourceCreateProps
 	): Promise<CKANAPIResourceShowResponse> {
 		return new Promise((resolve, reject) => {
-			const url = `${CKANAPIBase.BASE_CKAN_API_URL}/resource_create`;
-			// const formData = new FormData();
-			const formData = new NodeFormData();
+			const url = `${this.BASE_CKAN_API_URL}/resource_create`;
+			const formData = new FormData();
 			Object.entries(data).forEach(([key, val]) => formData.append(key, val));
 
 			nodeFetch(url, {
 				method: "POST",
 				headers: {
-					Authorization: CKANAPIBase.API_KEY,
+					Authorization: this.API_KEY,
 				},
 				body: formData,
 			})
@@ -97,21 +99,18 @@ export class CKANResourceService {
 		});
 	}
 
-	static remove() {}
-
-	static update(
+	update(
 		data: CKANAPIResourceUpdateProps
 	): Promise<CKANAPIResourceShowResponse> {
 		return new Promise((resolve, reject) => {
-			const url = `${CKANAPIBase.BASE_CKAN_API_URL}/resource_update`;
+			const url = `${this.BASE_CKAN_API_URL}/resource_update`;
 			const formData = new FormData();
-			// const formData = new NodeFormData();
 			Object.entries(data).forEach(([key, val]) => formData.append(key, val));
 
 			fetch(url, {
 				method: "POST",
 				headers: {
-					Authorization: CKANAPIBase.API_KEY,
+					Authorization: this.API_KEY,
 				},
 				body: formData,
 			})

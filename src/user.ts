@@ -1,4 +1,4 @@
-import { CKANAPIBase } from "./";
+import { CKANAPIBase, CKANAPIBaseProps } from "./";
 import {
 	CKANAPIResponse,
 	CKANAPITokenRevokeProps,
@@ -15,8 +15,12 @@ import {
 	CKANAPIUserUpdateProps,
 } from "./types";
 
-export class CKANUserService {
-	static get(
+export class CKANUserService extends CKANAPIBase {
+	constructor(props: CKANAPIBaseProps) {
+		super(props);
+	}
+
+	get(
 		type: "list" | "show" | "api_token_list",
 		data: Partial<
 			CKANAPIUserhowProps | CKANAPIUserListProps | CKANAPIUserTokenProps
@@ -28,27 +32,21 @@ export class CKANUserService {
 			let url;
 
 			if (type === "api_token_list")
-				url = `${
-					CKANAPIBase.BASE_CKAN_API_URL
-				}/api_token_list?${new URLSearchParams(data as any).toString()}`;
+				url = `${this.BASE_CKAN_API_URL}/api_token_list?${new URLSearchParams(
+					data as any
+				).toString()}`;
 			else if (type === "show")
-				url = `${CKANAPIBase.BASE_CKAN_API_URL}/user_show?${new URLSearchParams(
+				url = `${this.BASE_CKAN_API_URL}/user_show?${new URLSearchParams(
 					data as any
 				).toString()}`;
 			else
-				url = `${CKANAPIBase.BASE_CKAN_API_URL}/user_list?${new URLSearchParams(
+				url = `${this.BASE_CKAN_API_URL}/user_list?${new URLSearchParams(
 					data as any
 				).toString()}`;
 
-			console.log("");
-
-			const { API_KEY, API_KEY_ID } = CKANAPIBase;
-			console.log("API_KEY: ", API_KEY, "API_KEY_ID: ", API_KEY_ID);
-
-			fetch(url, { headers: { Authorization: CKANAPIBase.API_KEY } })
+			fetch(url, { headers: { Authorization: this.API_KEY } })
 				.then((res) => res.json())
 				.then((res) => {
-					// console.log('res: ', res);
 					if (type === "list") return resolve(res as CKANAPIUserListResponse);
 					else if (type === "show")
 						return resolve(res as CKANAPIUserShowResponse);
@@ -61,7 +59,7 @@ export class CKANUserService {
 		});
 	}
 
-	static create(
+	create(
 		type: "user_create" | "api_token_create",
 		data: CKANAPIUserCreateProps | CKANAPIUserTokenCreateProps
 	): Promise<CKANAPIUserShowResponse | CKANAPIUserTokenCreateResponse> {
@@ -70,17 +68,16 @@ export class CKANUserService {
 			Object.entries(data).forEach(([key, val]) => formData.append(key, val));
 
 			let url;
-			if (type === "user_create")
-				url = `${CKANAPIBase.BASE_CKAN_API_URL}/user_create`;
+			if (type === "user_create") url = `${this.BASE_CKAN_API_URL}/user_create`;
 			else
-				url = `${
-					CKANAPIBase.BASE_CKAN_API_URL
-				}/api_token_create?${new URLSearchParams(data as any).toString()}`;
+				url = `${this.BASE_CKAN_API_URL}/api_token_create?${new URLSearchParams(
+					data as any
+				).toString()}`;
 
 			fetch(url, {
 				method: "POST",
 				headers: {
-					Authorization: CKANAPIBase.API_KEY,
+					Authorization: this.API_KEY,
 				},
 				body: formData,
 			})
@@ -96,29 +93,28 @@ export class CKANUserService {
 		});
 	}
 
-	static remove(
+	remove(
 		type: "user_remove" | "api_token_revoke",
 		data: CKANAPIUserRemoveProps | CKANAPITokenRevokeProps
 	): Promise<CKANAPIResponse> {
 		return new Promise((resolve, reject) => {
 			let url;
 			const formData = new FormData();
-			// const formData = new NodeFormData();
 
 			if (type === "user_remove") {
-				url = `${
-					CKANAPIBase.BASE_CKAN_API_URL
-				}/user_delete?${new URLSearchParams(data as any).toString()}`;
+				url = `${this.BASE_CKAN_API_URL}/user_delete?${new URLSearchParams(
+					data as any
+				).toString()}`;
 				formData.append("id", (data as CKANAPIUserRemoveProps).id);
 			} else {
-				url = `${CKANAPIBase.BASE_CKAN_API_URL}/api_token_revoke`;
+				url = `${this.BASE_CKAN_API_URL}/api_token_revoke`;
 				Object.entries(data).forEach(([key, val]) => formData.append(key, val));
 			}
 
 			fetch(url, {
 				method: "POST",
 				headers: {
-					Authorization: CKANAPIBase.API_KEY,
+					Authorization: this.API_KEY,
 				},
 				body: formData,
 			})
@@ -134,19 +130,16 @@ export class CKANUserService {
 		});
 	}
 
-	static update(
-		data: CKANAPIUserUpdateProps
-	): Promise<CKANAPIUserShowResponse> {
+	update(data: CKANAPIUserUpdateProps): Promise<CKANAPIUserShowResponse> {
 		return new Promise((resolve, reject) => {
-			const url = `${CKANAPIBase.BASE_CKAN_API_URL}/user_update`;
+			const url = `${this.BASE_CKAN_API_URL}/user_update`;
 			const formData = new FormData();
-			// const formData = new NodeFormData();
 			Object.entries(data).forEach(([key, val]) => formData.append(key, val));
 
 			fetch(url, {
 				method: "POST",
 				headers: {
-					Authorization: CKANAPIBase.API_KEY,
+					Authorization: this.API_KEY,
 				},
 				body: formData,
 			})

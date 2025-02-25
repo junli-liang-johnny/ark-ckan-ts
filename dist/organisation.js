@@ -1,17 +1,35 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CKANAPIOrganisationService = void 0;
-var _1 = require(".");
-var CKANAPIOrganisationService = /** @class */ (function () {
-    function CKANAPIOrganisationService() {
+var _1 = require("./");
+var CKANAPIOrganisationService = /** @class */ (function (_super) {
+    __extends(CKANAPIOrganisationService, _super);
+    function CKANAPIOrganisationService(props) {
+        return _super.call(this, props) || this;
     }
-    CKANAPIOrganisationService.get = function (type, data) {
+    CKANAPIOrganisationService.prototype.get = function (type, data) {
+        var _this = this;
         return new Promise(function (resolve, reject) {
             var url;
-            if (type === 'list')
-                url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/organization_list?").concat(new URLSearchParams(data).toString());
+            if (type === "list")
+                url = "".concat(_this.BASE_CKAN_API_URL, "/organization_list?").concat(new URLSearchParams(data).toString());
             else
-                url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/organization_show?").concat(new URLSearchParams(data).toString());
+                url = "".concat(_this.BASE_CKAN_API_URL, "/organization_show?").concat(new URLSearchParams(data).toString());
             fetch(url)
                 .then(function (res) { return res.json(); })
                 .then(function (res) {
@@ -20,35 +38,34 @@ var CKANAPIOrganisationService = /** @class */ (function () {
                 .catch(function (err) { return reject(err); });
         });
     };
-    CKANAPIOrganisationService.create = function (type, data) {
+    CKANAPIOrganisationService.prototype.create = function (type, data) {
+        var _this = this;
         return new Promise(function (resolve, reject) {
-            // console.log('ckan organisation - data: ', data);
             var url;
             var formData = new FormData();
             Object.entries(data).forEach(function (_a) {
                 var key = _a[0], val = _a[1];
                 return formData.append(key, val);
             });
-            if (type === 'member_create')
-                url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/organization_member_create");
+            if (type === "member_create")
+                url = "".concat(_this.BASE_CKAN_API_URL, "/organization_member_create");
             else
-                url = "".concat(_1.CKANAPIBase.BASE_CKAN_API_URL, "/organization_member_create");
-            fetch(url, { 'method': 'POST', 'headers': { 'Authorization': _1.CKANAPIBase.API_KEY }, 'body': formData })
+                url = "".concat(_this.BASE_CKAN_API_URL, "/organization_member_create");
+            fetch(url, {
+                method: "POST",
+                headers: { Authorization: _this.API_KEY },
+                body: formData,
+            })
                 .then(function (res) { return res.json(); })
                 .then(function (res) {
-                // console.log('ckan organisation - res: ', res);
-                if (type === 'member_create')
+                if (type === "member_create")
                     return resolve(res);
                 resolve(res);
             })
                 .catch(function (err) { return reject(err); });
         });
     };
-    CKANAPIOrganisationService.remove = function () {
-    };
-    CKANAPIOrganisationService.update = function () {
-    };
     return CKANAPIOrganisationService;
-}());
+}(_1.CKANAPIBase));
 exports.CKANAPIOrganisationService = CKANAPIOrganisationService;
 //# sourceMappingURL=organisation.js.map

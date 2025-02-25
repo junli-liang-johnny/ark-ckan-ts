@@ -1,4 +1,4 @@
-import { CKANAPIBase } from ".";
+import { CKANAPIBase, CKANAPIBaseProps } from "./";
 import {
 	CKANAPIGetListResponse,
 	CKANAPIOrganisationGetListProps,
@@ -8,8 +8,12 @@ import {
 	CKANAPIOrganizationGetShowProps,
 } from "./types";
 
-export class CKANAPIOrganisationService {
-	static get(
+export class CKANAPIOrganisationService extends CKANAPIBase {
+	constructor(props: CKANAPIBaseProps) {
+		super(props);
+	}
+
+	get(
 		type: "list" | "show",
 		data: Partial<
 			CKANAPIOrganisationGetListProps | CKANAPIOrganizationGetShowProps
@@ -20,11 +24,11 @@ export class CKANAPIOrganisationService {
 
 			if (type === "list")
 				url = `${
-					CKANAPIBase.BASE_CKAN_API_URL
+					this.BASE_CKAN_API_URL
 				}/organization_list?${new URLSearchParams(data as any).toString()}`;
 			else
 				url = `${
-					CKANAPIBase.BASE_CKAN_API_URL
+					this.BASE_CKAN_API_URL
 				}/organization_show?${new URLSearchParams(data as any).toString()}`;
 
 			fetch(url)
@@ -38,28 +42,26 @@ export class CKANAPIOrganisationService {
 		});
 	}
 
-	static create(
+	create(
 		type: "member_create",
 		data: CKANAPIOrganisationMemberCreateProps
 	): Promise<CKANAPIOrganisationMemberCreateResponse> {
 		return new Promise((resolve, reject) => {
-			// console.log('ckan organisation - data: ', data);
 			let url;
 			const formData = new FormData();
 			Object.entries(data).forEach(([key, val]) => formData.append(key, val));
 
 			if (type === "member_create")
-				url = `${CKANAPIBase.BASE_CKAN_API_URL}/organization_member_create`;
-			else url = `${CKANAPIBase.BASE_CKAN_API_URL}/organization_member_create`;
+				url = `${this.BASE_CKAN_API_URL}/organization_member_create`;
+			else url = `${this.BASE_CKAN_API_URL}/organization_member_create`;
 
 			fetch(url, {
 				method: "POST",
-				headers: { Authorization: CKANAPIBase.API_KEY },
+				headers: { Authorization: this.API_KEY },
 				body: formData,
 			})
 				.then((res) => res.json())
 				.then((res) => {
-					// console.log('ckan organisation - res: ', res);
 					if (type === "member_create")
 						return resolve(res as CKANAPIOrganisationMemberCreateResponse);
 
@@ -68,8 +70,4 @@ export class CKANAPIOrganisationService {
 				.catch((err) => reject(err));
 		});
 	}
-
-	static remove() {}
-
-	static update() {}
 }

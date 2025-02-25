@@ -1,6 +1,4 @@
-import nodeFetch from "node-fetch";
-import NodeFormData from "form-data";
-import { CKANAPIBase } from ".";
+import { CKANAPIBase, CKANAPIBaseProps } from "./";
 import {
 	CKANAPIGetListResponse,
 	CKANAPIHeaders,
@@ -22,17 +20,21 @@ type ReturnType =
 	| CKANAPIPackageSearchResponse
 	| CKANAPIPackageAutocompleteResponse;
 
-export class CKANPackageService {
-	static dcatDatasetURL(id: string) {
-		return `${CKANAPIBase.BASE_CKAN_URL}/dataset/${id}`;
+export class CKANPackageService extends CKANAPIBase {
+	constructor(props: CKANAPIBaseProps) {
+		super(props);
 	}
 
-	static isDcatDatasetURL = (id: string | undefined) => {
+	dcatDatasetURL(id: string) {
+		return `${this.BASE_CKAN_URL}/dataset/${id}`;
+	}
+
+	isDcatDatasetURL = (id: string | undefined) => {
 		if (!id) return false;
 		return id.includes("dataset") && !id.includes("resource");
 	};
 
-	static get = <T extends ReturnType>(
+	get = <T extends ReturnType>(
 		action: CKANAPIAction,
 		data: Partial<
 			| CKANAPIPackageShowProps
@@ -44,11 +46,11 @@ export class CKANPackageService {
 		return new Promise((resolve, reject) => {
 			console.log("ckan package - get - data: ", data, ", headers: ", headers);
 
-			const url = createGetURL(action, data);
+			const url = this.createGetURL(action, data);
 
-			nodeFetch(url, {
+			fetch(url, {
 				headers: {
-					Authorization: headers?.Authorization || CKANAPIBase.API_KEY,
+					Authorization: headers?.Authorization || this.API_KEY,
 				},
 			})
 				.then((res) => res.json())
@@ -62,20 +64,16 @@ export class CKANPackageService {
 		});
 	};
 
-	static create(
-		data: CKANAPIPackageCreateProps
-	): Promise<CKANAPIPackageShowResponse> {
+	create(data: CKANAPIPackageCreateProps): Promise<CKANAPIPackageShowResponse> {
 		return new Promise((resolve, reject) => {
-			const url = `${CKANAPIBase.BASE_CKAN_API_URL}/package_create`;
-			// const formData = new FormData();
-			const formData = new NodeFormData();
+			const url = `${this.BASE_CKAN_API_URL}/package_create`;
+			const formData = new FormData();
 			Object.entries(data).forEach(([key, val]) => formData.append(key, val));
 
-			nodeFetch(url, {
+			fetch(url, {
 				method: "POST",
 				headers: {
-					Authorization: CKANAPIBase.API_KEY,
-					// 'Content-Type': 'application/json'
+					Authorization: this.API_KEY,
 				},
 				body: formData,
 			})
@@ -90,18 +88,14 @@ export class CKANPackageService {
 		});
 	}
 
-	static remove() {}
-
-	static update(
-		data: CKANAPIPackageUpdateProps
-	): Promise<CKANAPIPackageShowResponse> {
+	update(data: CKANAPIPackageUpdateProps): Promise<CKANAPIPackageShowResponse> {
 		return new Promise((resolve, reject) => {
-			const url = `${CKANAPIBase.BASE_CKAN_API_URL}/package_update`;
+			const url = `${this.BASE_CKAN_API_URL}/package_update`;
 
 			fetch(url, {
 				method: "POST",
 				headers: {
-					Authorization: CKANAPIBase.API_KEY,
+					Authorization: this.API_KEY,
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(data),
@@ -116,26 +110,25 @@ export class CKANPackageService {
 				});
 		});
 	}
+	createGetURL = (action: CKANAPIAction, data: any) => {
+		let url: string;
+		if (action === "search")
+			url = `${this.BASE_CKAN_API_URL}/package_search?${new URLSearchParams(
+				data as any
+			).toString()}`;
+		else if (action === "show")
+			url = `${this.BASE_CKAN_API_URL}/package_show?${new URLSearchParams(
+				data as any
+			).toString()}`;
+		else if (action === "autocomplete")
+			url = `${
+				this.BASE_CKAN_API_URL
+			}/package_autocomplete?${new URLSearchParams(data as any).toString()}`;
+		else
+			url = `${this.BASE_CKAN_API_URL}/package_list?${new URLSearchParams(
+				data as any
+			).toString()}`;
+
+		return url;
+	};
 }
-
-const createGetURL = (action: CKANAPIAction, data: any) => {
-	let url: string;
-	if (action === "search")
-		url = `${
-			CKANAPIBase.BASE_CKAN_API_URL
-		}/package_search?${new URLSearchParams(data as any).toString()}`;
-	else if (action === "show")
-		url = `${CKANAPIBase.BASE_CKAN_API_URL}/package_show?${new URLSearchParams(
-			data as any
-		).toString()}`;
-	else if (action === "autocomplete")
-		url = `${
-			CKANAPIBase.BASE_CKAN_API_URL
-		}/package_autocomplete?${new URLSearchParams(data as any).toString()}`;
-	else
-		url = `${CKANAPIBase.BASE_CKAN_API_URL}/package_list?${new URLSearchParams(
-			data as any
-		).toString()}`;
-
-	return url;
-};

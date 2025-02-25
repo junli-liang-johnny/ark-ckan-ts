@@ -42,15 +42,13 @@ class CKANUserService extends CKANService {
 	// update() {}
 	delete(id: string) {
 		return new Promise<boolean>((resolve, reject) => {
-			// const _url = `${this.url}/user_delete`;
-			const _url = "https://ark-evidence.adaptcentre.ie/user/delete/" + id;
+			const _url = this.url + "/delete";
 
 			fetch(_url, {
 				method: "POST",
 				headers: this._headers,
 				body: JSON.stringify({ id: id }),
 			}).then((res) => {
-				// console.log("UserService - delete - res: ", res);
 				if (res.ok) return resolve(true);
 				else {
 					console.error("UserService - delete - Failed to fetch, res: ", res);

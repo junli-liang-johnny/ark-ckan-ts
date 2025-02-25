@@ -19,5 +19,6 @@ __exportStar(require("./package"), exports);
 __exportStar(require("./resource"), exports);
 __exportStar(require("./user"), exports);
 __exportStar(require("./base"), exports);
+__exportStar(require("./helper"), exports);
 __exportStar(require("./organisation"), exports);
 //# sourceMappingURL=index.js.map

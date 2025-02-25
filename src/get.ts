@@ -8,8 +8,13 @@ import { CKANUserService } from "./user";
 // import { CKANPackageService } from "./package";
 // import { CKANResourceService } from "./resource";
 
-const url = "https://ark-evidence.adaptcentre.ie/api/action";
-// const url = 'https://demo.ckan.org/api/action';
+const ckanAPIBase = new CKANAPIBase({
+	ckan_url: "",
+	ckan_api_url: "",
+	api_key: "",
+	api_key_id: "",
+});
+
 // const formData = new FormData();
 
 // create resource
@@ -95,8 +100,8 @@ const apiToken = "";
 // fetch(url + '/resource_search?query=package_id:7581a1b4-10b1-43bb-b447-0c35215f4e14')
 // fetch(url + '/organization_member_create', { 'method': 'POST', 'headers': { 'Authorization': CKANAPIBase.API_KEY }, 'body': formData })
 // fetch(url + '/api_token_list?user=testuser', { 'headers': { 'Authorization': CKANAPIBase.API_KEY } })
-fetch(url + "/api_token_list?user=junli", {
-	headers: { Authorization: CKANAPIBase.API_KEY },
+fetch(ckanAPIBase.BASE_CKAN_API_URL + "/api_token_list?user=junli", {
+	headers: { Authorization: ckanAPIBase.API_KEY },
 })
 	.then((res) => res.json())
 	.then((res) => console.log("res: ", res));
