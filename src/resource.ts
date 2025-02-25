@@ -1,5 +1,4 @@
-import nodeFetch from "node-fetch";
-import { CKANAPIBase, CKANAPIBaseProps } from "./";
+import { CKANAPIBase, CKANAPIBaseProps } from "./base";
 import {
 	CKANAPIHeaders,
 	CKANAPIAction,
@@ -80,7 +79,7 @@ export class CKANResourceService extends CKANAPIBase {
 			const formData = new FormData();
 			Object.entries(data).forEach(([key, val]) => formData.append(key, val));
 
-			nodeFetch(url, {
+			fetch(url, {
 				method: "POST",
 				headers: {
 					Authorization: this.API_KEY,

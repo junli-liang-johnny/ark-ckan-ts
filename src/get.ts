@@ -2,17 +2,16 @@
 // import FormData from "form-data";
 // import { CKANAPIBase } from "./base";
 import { CKANAPIBase } from "./base";
-import { CKANAPIOrganisationService } from "./organisation";
 import { CKANAPIOrganisationShowResponse, CKANAPIUser } from "./types";
 import { CKANUserService } from "./user";
 // import { CKANPackageService } from "./package";
 // import { CKANResourceService } from "./resource";
 
 const ckanAPIBase = new CKANAPIBase({
-	ckan_url: "",
-	ckan_api_url: "",
-	api_key: "",
-	api_key_id: "",
+	ckanURL: "",
+	ckanAPIURL: "",
+	apiKey: "",
+	apiKeyID: "",
 });
 
 // const formData = new FormData();

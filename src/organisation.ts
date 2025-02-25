@@ -1,4 +1,4 @@
-import { CKANAPIBase, CKANAPIBaseProps } from "./";
+import { CKANAPIBase, CKANAPIBaseProps } from "./base";
 import {
 	CKANAPIGetListResponse,
 	CKANAPIOrganisationGetListProps,
@@ -8,7 +8,7 @@ import {
 	CKANAPIOrganizationGetShowProps,
 } from "./types";
 
-export class CKANAPIOrganisationService extends CKANAPIBase {
+export class CKANOrganisationService extends CKANAPIBase {
 	constructor(props: CKANAPIBaseProps) {
 		super(props);
 	}

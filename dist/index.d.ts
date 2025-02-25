@@ -5,3 +5,4 @@ export * from "./user";
 export * from "./base";
 export * from "./helper";
 export * from "./organisation";
+export * from "./group";

@@ -1,4 +1,4 @@
-import { CKANAPIBase, CKANAPIBaseProps } from "./";
+import { CKANAPIBase, CKANAPIBaseProps } from "./base";
 import { CKANAPIResponse, CKANAPITokenRevokeProps, CKANAPIUserCreateProps, CKANAPIUserListResponse, CKANAPIUserhowProps, CKANAPIUserListProps, CKANAPIUserRemoveProps, CKANAPIUserShowResponse, CKANAPIUserTokenCreateProps, CKANAPIUserTokenCreateResponse, CKANAPIUserTokenProps, CKANAPIUserTokenResponse, CKANAPIUserUpdateProps } from "./types";
 export declare class CKANUserService extends CKANAPIBase {
     constructor(props: CKANAPIBaseProps);

@@ -21,4 +21,5 @@ __exportStar(require("./user"), exports);
 __exportStar(require("./base"), exports);
 __exportStar(require("./helper"), exports);
 __exportStar(require("./organisation"), exports);
+__exportStar(require("./group"), exports);
 //# sourceMappingURL=index.js.map

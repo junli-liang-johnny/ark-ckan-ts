@@ -15,14 +15,14 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CKANAPIOrganisationService = void 0;
-var _1 = require("./");
-var CKANAPIOrganisationService = /** @class */ (function (_super) {
-    __extends(CKANAPIOrganisationService, _super);
-    function CKANAPIOrganisationService(props) {
+exports.CKANOrganisationService = void 0;
+var base_1 = require("./base");
+var CKANOrganisationService = /** @class */ (function (_super) {
+    __extends(CKANOrganisationService, _super);
+    function CKANOrganisationService(props) {
         return _super.call(this, props) || this;
     }
-    CKANAPIOrganisationService.prototype.get = function (type, data) {
+    CKANOrganisationService.prototype.get = function (type, data) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             var url;
@@ -38,7 +38,7 @@ var CKANAPIOrganisationService = /** @class */ (function (_super) {
                 .catch(function (err) { return reject(err); });
         });
     };
-    CKANAPIOrganisationService.prototype.create = function (type, data) {
+    CKANOrganisationService.prototype.create = function (type, data) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             var url;
@@ -65,7 +65,7 @@ var CKANAPIOrganisationService = /** @class */ (function (_super) {
                 .catch(function (err) { return reject(err); });
         });
     };
-    return CKANAPIOrganisationService;
-}(_1.CKANAPIBase));
-exports.CKANAPIOrganisationService = CKANAPIOrganisationService;
+    return CKANOrganisationService;
+}(base_1.CKANAPIBase));
+exports.CKANOrganisationService = CKANOrganisationService;
 //# sourceMappingURL=organisation.js.map

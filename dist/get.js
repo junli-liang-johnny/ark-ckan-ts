@@ -7,10 +7,10 @@ var base_1 = require("./base");
 // import { CKANPackageService } from "./package";
 // import { CKANResourceService } from "./resource";
 var ckanAPIBase = new base_1.CKANAPIBase({
-    ckan_url: "",
-    ckan_api_url: "",
-    api_key: "",
-    api_key_id: "",
+    ckanURL: "",
+    ckanAPIURL: "",
+    apiKey: "",
+    apiKeyID: "",
 });
 // const formData = new FormData();
 // create resource

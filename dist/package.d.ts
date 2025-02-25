@@ -1,4 +1,4 @@
-import { CKANAPIBase, CKANAPIBaseProps } from "./";
+import { CKANAPIBase, CKANAPIBaseProps } from "./base";
 import { CKANAPIGetListResponse, CKANAPIHeaders, CKANAPIAction, CKANAPIGetServiceResponse, CKANAPIPackageAutocompleteResponse, CKANAPIPackageCreateProps, CKANAPIPackageListProps, CKANAPIPackageSearchProps, CKANAPIPackageSearchResponse, CKANAPIPackageShowProps, CKANAPIPackageShowResponse, CKANAPIPackageUpdateProps } from "./types";
 type ReturnType = CKANAPIGetListResponse | CKANAPIPackageShowResponse | CKANAPIPackageSearchResponse | CKANAPIPackageAutocompleteResponse;
 export declare class CKANPackageService extends CKANAPIBase {

@@ -14,13 +14,9 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CKANResourceService = void 0;
-var node_fetch_1 = __importDefault(require("node-fetch"));
-var _1 = require("./");
+var base_1 = require("./base");
 var CKANResourceService = /** @class */ (function (_super) {
     __extends(CKANResourceService, _super);
     function CKANResourceService(props) {
@@ -64,7 +60,7 @@ var CKANResourceService = /** @class */ (function (_super) {
                 var key = _a[0], val = _a[1];
                 return formData.append(key, val);
             });
-            (0, node_fetch_1.default)(url, {
+            fetch(url, {
                 method: "POST",
                 headers: {
                     Authorization: _this.API_KEY,
@@ -120,6 +116,6 @@ var CKANResourceService = /** @class */ (function (_super) {
         return split[packageIndex + 1];
     };
     return CKANResourceService;
-}(_1.CKANAPIBase));
+}(base_1.CKANAPIBase));
 exports.CKANResourceService = CKANResourceService;
 //# sourceMappingURL=resource.js.map

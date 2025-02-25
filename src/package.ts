@@ -1,4 +1,4 @@
-import { CKANAPIBase, CKANAPIBaseProps } from "./";
+import { CKANAPIBase, CKANAPIBaseProps } from "./base";
 import {
 	CKANAPIGetListResponse,
 	CKANAPIHeaders,

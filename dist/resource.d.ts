@@ -1,4 +1,4 @@
-import { CKANAPIBase, CKANAPIBaseProps } from "./";
+import { CKANAPIBase, CKANAPIBaseProps } from "./base";
 import { CKANAPIHeaders, CKANAPIAction, CKANAPIGetServiceResponse, CKANAPIResourceCreateProps, CKANAPIResourceSearchProps, CKANAPIResourceSearchResponse, CKANAPIResourceShowProps, CKANAPIResourceShowResponse, CKANAPIResourceUpdateProps } from "./types";
 type ReturnType = CKANAPIResourceShowResponse | CKANAPIResourceSearchResponse;
 export declare class CKANResourceService extends CKANAPIBase {

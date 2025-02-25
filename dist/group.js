@@ -16,7 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CKANGroupService = void 0;
-var _1 = require("./");
+var base_1 = require("./base");
 var getListParamArray = [
     "all_fields",
     "groups",
@@ -54,6 +54,6 @@ var CKANGroupService = /** @class */ (function (_super) {
         });
     };
     return CKANGroupService;
-}(_1.CKANAPIBase));
+}(base_1.CKANAPIBase));
 exports.CKANGroupService = CKANGroupService;
 //# sourceMappingURL=group.js.map

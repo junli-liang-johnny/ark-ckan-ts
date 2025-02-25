@@ -16,7 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CKANUserService = void 0;
-var _1 = require("./");
+var base_1 = require("./base");
 var CKANUserService = /** @class */ (function (_super) {
     __extends(CKANUserService, _super);
     function CKANUserService(props) {
@@ -143,6 +143,6 @@ var CKANUserService = /** @class */ (function (_super) {
         });
     };
     return CKANUserService;
-}(_1.CKANAPIBase));
+}(base_1.CKANAPIBase));
 exports.CKANUserService = CKANUserService;
 //# sourceMappingURL=user.js.map

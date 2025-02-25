@@ -16,7 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CKANPackageService = void 0;
-var _1 = require("./");
+var base_1 = require("./base");
 var CKANPackageService = /** @class */ (function (_super) {
     __extends(CKANPackageService, _super);
     function CKANPackageService(props) {
@@ -111,6 +111,6 @@ var CKANPackageService = /** @class */ (function (_super) {
         });
     };
     return CKANPackageService;
-}(_1.CKANAPIBase));
+}(base_1.CKANAPIBase));
 exports.CKANPackageService = CKANPackageService;
 //# sourceMappingURL=package.js.map
